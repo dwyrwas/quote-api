@@ -25,6 +25,19 @@ app.get('/api/quotes', (req, res, next) => {
     } else {
         res.send({quotes:quotes});
     }
+});
+
+app.post('/api/quotes', (req, res) => {
+    const newQuote = { quote:{
+        quote: req.query.quote,
+        person: req.query.person
+    }}
+    if (req.query.quote && req.query.person){
+        quotes.push(newQuote.quote);
+        res.send(newQuote);
+    } else {
+        res.status(400).send();
+    }
 })
 
 app.listen(PORT);
