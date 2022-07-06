@@ -18,12 +18,12 @@ app.get('/api/quotes/random', (req, res, next) => {
 });
 
 app.get('/api/quotes', (req, res, next) => {
-    const reqPerson = req.query.name;
+    const reqPerson = req.query.person;
+    const quotesByPerson = quotes.filter(quote => quote.person == reqPerson);
     if(reqPerson){
-        const quotesByAuthor = quotes.filter(quote => quote.person === reqPerson);
-        res.send(quotesByAuthor);
+        res.send({quotes:quotesByPerson});
     } else {
-        res.send(quotes);
+        res.send({quotes:quotes});
     }
 })
 
